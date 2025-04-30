@@ -1,0 +1,5 @@
+numpy==2.2.5
+influxdb_client==1.48.0
+ltr559==1.0.0
+pimoroni-bme280==1.0.0
+smbus2==0.4.2

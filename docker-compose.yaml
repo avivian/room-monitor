@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  room-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    privileged: true  # Needed for I2C access to sensors
+    devices:
+      - /dev/i2c-1:/dev/i2c-1  # Map I2C device for sensor access
+    environment:
+      - INFLUXDB_URL=${INFLUXDB_URL}
+      - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
+      - INFLUXDB_ORG=${INFLUXDB_ORG}
+      - INFLUXDB_BUCKET=${INFLUXDB_BUCKET}
+      - ROOM_NAME=${ROOM_NAME}
