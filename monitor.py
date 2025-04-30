@@ -111,23 +111,23 @@ class Monitor:
             # Calculate trend
             if r_squared > 0.5:
                 if change_per_hour > 0.5:
-                    trend = ">"
+                    self.trend = ">"
                 elif change_per_hour < -0.5:
-                    trend = "<"
+                    self.trend = "<"
                 elif -0.5 <= change_per_hour <= 0.5:
-                    trend = "-"
+                    self.trend = "-"
 
-                if trend != "-":
+                if self.trend != "-":
                     if abs(change_per_hour) > 3:
-                        trend *= 2
+                        self.trend *= 2
         else:
             self.pressure_vals.append(pressure)
             self.time_vals.append(t)
             mean_pressure = numpy.mean(self.pressure_vals)
             change_per_hour = 0
-            trend = "-"
+            self.trend = "-"
 
-        return (mean_pressure, change_per_hour, trend)
+        return (mean_pressure, change_per_hour, self.trend)
 
     def get_light(self) -> float:
         return self.ltr559.get_lux()
